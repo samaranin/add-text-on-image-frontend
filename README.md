@@ -1,7 +1,7 @@
 
----
 
 ### Add text to image frontend
+---
 
 This is a frontend for another my project - https://github.com/samaranin/add-text-on-image-backend.   
 
@@ -26,7 +26,7 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 
 By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
 
-
+---
 ### Deploying to the web
 
 #### With [now](https://zeit.co/now)
