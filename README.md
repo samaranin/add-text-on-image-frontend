@@ -1,12 +1,13 @@
 
 ---
 
-# Add text to image frontend
+### Add text to image frontend
 
 This is a frontend for another my project - https://github.com/samaranin/add-text-on-image-backend.   
 
+---
 
-## Get started
+#### Get started
 
 Install the dependencies...
 
@@ -26,9 +27,9 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
 
 
-## Deploying to the web
+### Deploying to the web
 
-### With [now](https://zeit.co/now)
+#### With [now](https://zeit.co/now)
 
 Install `now` if you haven't already:
 
@@ -45,7 +46,7 @@ now
 
 As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
 
-### With [surge](https://surge.sh/)
+#### With [surge](https://surge.sh/)
 
 Install `surge` if you haven't already:
 
