@@ -9,7 +9,7 @@
     export let selected = "";
 
     function changeSelected(value) {
-		dispatch('select_value', {
+		dispatch('change', {
 			value: value
 		});
 	}

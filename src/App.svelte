@@ -26,11 +26,7 @@
 		selected_values["height"] = json["height"];
 	}
 
-	function handleValueChange(event) {
-		getImageSize(event.detail.value);
-	}
-
-	async function getPreviewImage() {
+	async function getImageWithText() {
 		//clear previous generated images
 		const cleared = await fetch(server_url + "/api/remove_temp_files/");
 
@@ -62,15 +58,20 @@
 			}
 		);
 		const json = await response.json();
+		return json["data"];
+	}
+
+	async function getPreviewImagePath() {
+		const image_with_text = await getImageWithText();
 		
 		// join background and label
-		const join_data = {
-			"text_image": json["data"], 
+		const data = {
+			"text_image": image_with_text, 
 			"label_image": selected_values["label_image"], 
 			"join": selected_values["join"]
 		};
 
-		const joined_images_request = await fetch(
+		const response = await fetch(
 			server_url+"/api/join_images/", 
 			{
 				headers: {
@@ -78,12 +79,24 @@
 					'Content-Type': 'application/json'
 				},
 				method: "POST",
-				body: JSON.stringify(join_data)
+				body: JSON.stringify(data)
 			}
 		);
 
-		const joined_images_response = await joined_images_request.json();
-		resultImagePath = joined_images_response["data"];
+		const json = await response.json();
+		return json["data"];
+	}
+
+	async function getPreviewImage(){
+		resultImagePath = await getPreviewImagePath();
+	}
+
+	function handleValueChange(event) {
+		getImageSize(event.detail.value);
+	}
+
+	function repaintPreview(event) {
+		getPreviewImage();
 	}
 </script>
 
@@ -162,7 +175,7 @@
 			label="Background:" 
 			list_url={server_url+"/api/backgrounds/"} 
 			bind:selected={selected_values["background_image"]} 
-			on:select_value={handleValueChange}	
+			on:change={handleValueChange}	
 		/>
 
 		<!--Selected label-->
@@ -262,9 +275,9 @@
 		<!--Action buttons-->
 		<div class="action-buttons">
 			<button on:click|preventDefault={getPreviewImage} class="show-preview">Show preview</button>
-			<form method="GET" action="{server_url+"/"+resultImagePath}">
-				<button class="download" target="_blank" download="new_image.png">Download</button>
-			</form>
+			{#if resultImagePath != ""}
+				<a class="download" href={server_url+"/"+resultImagePath}>Download</a>
+			{/if}
 		</div>
 	</form>
 
