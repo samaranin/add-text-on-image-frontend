@@ -2,6 +2,7 @@
 	import Dropdown from './Dropdown.svelte';
 	import Image from './Image.svelte';
 	import Input from './Input.svelte';
+	import Radiobutton from './Radiobutton.svelte';
 
 	let selected_values = [];
 
@@ -99,6 +100,7 @@
 			list_url={server_url+"/api/fonts/"} 
 			bind:selected={selected_values["font_name"]} 
 		/>
+
 		<!--Selected background-->
 		<Dropdown 
 			label="Background:" 
@@ -106,13 +108,22 @@
 			bind:selected={selected_values["background_image"]} 
 			on:select_value={handleValueChange}	
 		/>
+
 		<!--Selected label-->
 		<Dropdown 
 			label="Label:" 
 			list_url={server_url+"/api/labels/"} 
 			bind:selected={selected_values["label_image"]} 
 		/>
+
+		<!--Image join side-->
+		<Radiobutton 
+			labelLeft="Place label on left"
+			labelRight="Place label on right"
+			bind:value={selected_values["join"]}
+		/>
 		<hr />
+
 		<!--Header inputs-->
 		<Input 
 			label="Header:" 
@@ -158,6 +169,7 @@
 			disabled="{false}"
 		/>
 		<hr />
+
 		<!--Footer inputs-->
 		<Input 
 			label="Footer:" 
@@ -172,6 +184,7 @@
 			disabled="{false}" 
 		/>
 		<hr />
+
 		<!--Image size-->
 		<div class="image-size-inputs">
 			<Input 
@@ -189,6 +202,7 @@
 			/>
 		</div>
 		<hr />
+
 		<!--Action buttons-->
 		<div class="action-buttons">
 			<button class="show-preview">Show preview</button>
@@ -199,14 +213,26 @@
 	<div class="preview">
 		<p class="preview-header">Selected images:</p>
 		<div class="raw-preview">
-			<Image 
-				height="150px" 
-				image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
-			/>
-			<Image 
-				height="150px" 
-				image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
-			/>
+			{#if selected_values["join"] === "left"}
+				<Image 
+					height="150px" 
+					image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
+				/>
+				<Image 
+					height="150px" 
+					image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
+				/>
+			{:else}
+				<Image 
+					height="150px" 
+					image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
+				/>
+				<Image 
+					height="150px" 
+					image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
+				/>
+			{/if}
+			
 		</div>
 		<p class="preview-header">Ready image:</p>
 		<div class="ready-preview">

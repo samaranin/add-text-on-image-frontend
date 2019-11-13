@@ -1,8 +1,12 @@
 <script>
+    import { onMount } from 'svelte';
+
     export let label = "";
     export let placeholder = "";
     export let value = "";
     export let disabled = false;
+
+    onMount(async () => {value = placeholder});
 </script>
 
 <style>
@@ -43,9 +47,9 @@
 <div>
     <label>{label}</label>
     {#if !disabled} 
-        <input type="text" placeholder="{placeholder}" bind:value={value}>
+        <input type="text" placeholder="{placeholder}" value="{placeholder}" bind:value={value}>
     {:else}
-        <input type="text" placeholder="{placeholder}" bind:value={value} disabled>
+        <input type="text" placeholder="{placeholder}" value="{placeholder}" bind:value={value} disabled>
     {/if}
     
 </div>
