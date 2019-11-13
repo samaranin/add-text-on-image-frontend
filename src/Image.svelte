@@ -2,8 +2,7 @@
     import { onMount } from 'svelte';
 
     export let image_url = "/sources/label/393-960.png";
-    export let label = "";
+    export let height = "120px";
 </script>
 
-<label>{label}</label>
-<img src="{image_url}" alt="label" />
+<img height={height} src="{image_url}" alt="label" />
