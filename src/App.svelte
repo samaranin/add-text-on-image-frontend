@@ -72,6 +72,20 @@
 	.download {
 		float: right;
 	}
+
+	@media (max-width: 640px) {
+		.image-editor {
+			width: 100%;
+			display: block;
+		}
+
+		.preview {
+			float: left;
+			width: 100%;
+			display: block;
+		}
+
+	}
 </style>
 
 <h1>Create image with text</h1>

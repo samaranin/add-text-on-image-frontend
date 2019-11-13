@@ -23,6 +23,17 @@
         height: auto;
     }
 
+    @media (max-width: 640px) {
+        div {
+            display: block;
+        }
+
+        input {
+            float: right;
+            width: 100%;
+        }
+    }
+
     label {
         width: 40%;
     }
