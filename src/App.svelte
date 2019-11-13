@@ -100,25 +100,82 @@
 		/>
 		<hr />
 		<!--Header inputs-->
-		<Input label="Header:" placeholder="Header text" bind:value={selected_values["header"]} disabled="{false}" />
-		<Input label="Header text width:" placeholder="40" bind:value={selected_values["text_width_header"]} disabled="{false}" />
-		<Input label="Header font size:" placeholder="30" bind:value={selected_values["font_size_header"]} disabled="{false}" />
+		<Input 
+			label="Header:" 
+			placeholder="Header text" 
+			bind:value={selected_values["header"]} 
+			disabled="{false}" 
+		/>
+
+		<Input 
+			label="Header text width:" 
+			placeholder="40" 
+			bind:value={selected_values["text_width_header"]} 
+			disabled="{false}"
+		/>
+
+		<Input 
+			label="Header font size:" 
+			placeholder="30" 
+			bind:value={selected_values["font_size_header"]} 
+			disabled="{false}" 
+		/>
 		<hr />
+
 		<!--Paragraph inputs-->
-		<Input label="Paragraph:" placeholder="Paragraph text" bind:value={selected_values["paragraph"]} disabled="{false}" />
-		<Input label="Paragraph text width:" placeholder="30" bind:value={selected_values["text_width_paragraph"]} disabled="{false}" />
-		<Input label="Paragraph font size:" placeholder="30" bind:value={selected_values["font_size_paragraph"]} disabled="{false}" />
+		<Input 
+			label="Paragraph:" 
+			placeholder="Paragraph text" 
+			bind:value={selected_values["paragraph"]} 
+			disabled="{false}" 
+		/>
+
+		<Input 
+			label="Paragraph text width:" 
+			placeholder="30" 
+			bind:value={selected_values["text_width_paragraph"]} 
+			disabled="{false}" 
+		/>
+
+		<Input 
+			label="Paragraph font size:" 
+			placeholder="30" 
+			bind:value={selected_values["font_size_paragraph"]} 
+			disabled="{false}"
+		/>
 		<hr />
 		<!--Footer inputs-->
-		<Input label="Footer:" placeholder="Footer text" bind:value={selected_values["footer"]} disabled="{false}" />
-		<Input label="Footer font size:" placeholder="30" bind:value={selected_values["font_size_footer"]} disabled="{false}" />
+		<Input 
+			label="Footer:" 
+			placeholder="Footer text" 
+			bind:value={selected_values["footer"]} 
+			disabled="{false}" 
+		/>
+		<Input 
+			label="Footer font size:" 
+			placeholder="30" 
+			bind:value={selected_values["font_size_footer"]} 
+			disabled="{false}" 
+		/>
 		<hr />
 		<!--Image size-->
 		<div class="image-size-inputs">
-			<Input label="Width:" placeholder="960" bind:value={selected_values["width"]} disabled="{true}" />
-			<Input label="Height:" placeholder="960" bind:value={selected_values["height"]} disabled="{true}" />
+			<Input 
+				label="Width:" 
+				placeholder="960" 
+				bind:value={selected_values["width"]} 
+				disabled="{true}" 
+			/>
+			
+			<Input 
+				label="Height:" 
+				placeholder="960" 
+				bind:value={selected_values["height"]} 
+				disabled="{true}" 
+			/>
 		</div>
 		<hr />
+		<!--Action buttons-->
 		<div class="action-buttons">
 			<button class="show-preview">Show preview</button>
 			<button class="download">Download</button>
@@ -128,12 +185,21 @@
 	<div class="preview">
 		<p class="preview-header">Selected images:</p>
 		<div class="raw-preview">
-			<Image height="150px" image_url={server_url+"/sources/labels/"+selected_values["label_image"]} />
-			<Image height="150px" image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} />
+			<Image 
+				height="150px" 
+				image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
+			/>
+			<Image 
+				height="150px" 
+				image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
+			/>
 		</div>
 		<p class="preview-header">Ready image:</p>
 		<div class="ready-preview">
-			<Image height="400px" image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} />
+			<Image 
+				height="400px" 
+				image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
+			/>
 		</div>
 	</div>
 </div>

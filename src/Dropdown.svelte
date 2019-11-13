@@ -15,7 +15,7 @@
 	}
   
     // async data fetching function
-    async function fetchFonts() {
+    async function fetchData() {
         const response = await fetch(list_url);
         const json = await response.json();
         const items = json["data"];
@@ -24,13 +24,13 @@
         return items;
     }
 
-    let promise = fetchFonts();
+    let promise = fetchData();
 
     function getFonts() {
-        promise = fetchFonts();
+        promise = fetchData();
     }
 
-    onMount(async () => fetchFonts());
+    onMount(async () => fetchData());
 </script>
 
 <style>
