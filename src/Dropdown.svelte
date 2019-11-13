@@ -1,9 +1,18 @@
 <script>
     import { onMount } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
 
     export let list_url = "http://localhost:5000/api/fonts/";
     export let label = "";
     export let selected = "";
+
+    function changeSelected(value) {
+		dispatch('select_value', {
+			value: value
+		});
+	}
   
     // async data fetching function
     async function fetchFonts() {
@@ -11,6 +20,7 @@
         const json = await response.json();
         const items = json["data"];
         selected = items[0];
+        changeSelected(selected);
         return items;
     }
 
@@ -51,7 +61,7 @@
 {:then items}
     <div>
         <label>{label}</label>
-        <select bind:value={selected}>
+        <select bind:value={selected} on:change="{()=> changeSelected(selected)}">
             {#each items as item}
                 <option value="{item}">
                     {item}

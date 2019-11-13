@@ -6,6 +6,27 @@
 	let selected_values = [];
 
 	const server_url = "http://localhost:5000";
+
+	async function getImageSize(selected_image){ 
+		const response = await fetch(
+			server_url+"/api/get_image_size/", 
+			{
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				method: "POST",
+				body: JSON.stringify({"image_type": "background", "image_name": selected_image})
+			}
+		);
+        const json = await response.json();
+		selected_values["width"] = json["width"];
+		selected_values["height"] = json["height"];
+	}
+
+	function handleValueChange(event) {
+		getImageSize(event.detail.value);
+	}
 </script>
 
 <style>
@@ -59,11 +80,24 @@
 <div class="container">
 	<form class="image-editor">
 		<!--Selected font-->
-		<Dropdown label="Font:" list_url={server_url+"/api/fonts/"} bind:selected={selected_values["font_name"]} />
+		<Dropdown 
+			label="Font:" 
+			list_url={server_url+"/api/fonts/"} 
+			bind:selected={selected_values["font_name"]} 
+		/>
 		<!--Selected background-->
-		<Dropdown label="Background:" list_url={server_url+"/api/backgrounds/"} bind:selected={selected_values["background_image"]} />
+		<Dropdown 
+			label="Background:" 
+			list_url={server_url+"/api/backgrounds/"} 
+			bind:selected={selected_values["background_image"]} 
+			on:select_value={handleValueChange}	
+		/>
 		<!--Selected label-->
-		<Dropdown label="Label:" list_url={server_url+"/api/labels/"} bind:selected={selected_values["label_image"]} />
+		<Dropdown 
+			label="Label:" 
+			list_url={server_url+"/api/labels/"} 
+			bind:selected={selected_values["label_image"]} 
+		/>
 		<hr />
 		<!--Header inputs-->
 		<Input label="Header:" placeholder="Header text" bind:value={selected_values["header"]} disabled="{false}" />
@@ -76,7 +110,7 @@
 		<Input label="Paragraph font size:" placeholder="30" bind:value={selected_values["font_size_paragraph"]} disabled="{false}" />
 		<hr />
 		<!--Footer inputs-->
-		<Input label="Footer:" placeholder="ParaFootergraph text" bind:value={selected_values["footer"]} disabled="{false}" />
+		<Input label="Footer:" placeholder="Footer text" bind:value={selected_values["footer"]} disabled="{false}" />
 		<Input label="Footer font size:" placeholder="30" bind:value={selected_values["font_size_footer"]} disabled="{false}" />
 		<hr />
 		<!--Image size-->
