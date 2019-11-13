@@ -3,7 +3,7 @@
 ### Add text to image frontend
 ---
 
-This is a frontend for another my project - https://github.com/samaranin/add-text-on-image-backend.   
+This is a frontend for another my project - https://github.com/samaranin/add-text-to-image-backend   
 
 ---
 
