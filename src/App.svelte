@@ -5,6 +5,7 @@
 	import Radiobutton from './Radiobutton.svelte';
 
 	let selected_values = [];
+	let resultImagePath = "";
 
 	const server_url = "http://localhost:5000";
 
@@ -27,6 +28,62 @@
 
 	function handleValueChange(event) {
 		getImageSize(event.detail.value);
+	}
+
+	async function getPreviewImage() {
+		//clear previous generated images
+		const cleared = await fetch(server_url + "/api/remove_temp_files/");
+
+		// write text on image
+		const data = {
+			"background_image": selected_values["background_image"], // <- must be on server in sources/backgrounds   
+			"header": selected_values["header"],    
+			"paragraph": selected_values["paragraph"],    
+			"footer": selected_values["footer"],   
+			"font_name": selected_values["font_name"],     // <- must be on server in fonts/
+			"width": selected_values["width"],    
+			"height": selected_values["height"],    
+			"text_width_header": selected_values["text_width_header"],  
+			"font_size_header": selected_values["font_size_header"],    
+			"text_width_paragraph": selected_values["text_width_paragraph"],    
+			"font_size_paragraph": selected_values["font_size_paragraph"],    
+			"font_size_footer": selected_values["font_size_footer"]
+		};
+
+		const response = await fetch(
+			server_url+"/api/write_text/", 
+			{
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				method: "POST",
+				body: JSON.stringify(data)
+			}
+		);
+		const json = await response.json();
+		
+		// join background and label
+		const join_data = {
+			"text_image": json["data"], 
+			"label_image": selected_values["label_image"], 
+			"join": selected_values["join"]
+		};
+
+		const joined_images_request = await fetch(
+			server_url+"/api/join_images/", 
+			{
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				method: "POST",
+				body: JSON.stringify(join_data)
+			}
+		);
+
+		const joined_images_response = await joined_images_request.json();
+		resultImagePath = joined_images_response["data"];
 	}
 </script>
 
@@ -52,7 +109,7 @@
 	.raw-preview, .ready-preview {
 		display: flex;
 		justify-content: center;
-		padding: 10px;
+		padding: 5px;
 	}
 
 	.preview-header {
@@ -85,7 +142,6 @@
 			width: 100%;
 			display: block;
 		}
-
 	}
 </style>
 
@@ -205,8 +261,10 @@
 
 		<!--Action buttons-->
 		<div class="action-buttons">
-			<button class="show-preview">Show preview</button>
-			<button class="download">Download</button>
+			<button on:click|preventDefault={getPreviewImage} class="show-preview">Show preview</button>
+			<form method="GET" action="{server_url+"/"+resultImagePath}">
+				<button class="download" target="_blank" download="new_image.png">Download</button>
+			</form>
 		</div>
 	</form>
 
@@ -215,20 +273,20 @@
 		<div class="raw-preview">
 			{#if selected_values["join"] === "left"}
 				<Image 
-					height="150px" 
+					height="200px" 
 					image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
 				/>
 				<Image 
-					height="150px" 
+					height="200px" 
 					image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
 				/>
 			{:else}
 				<Image 
-					height="150px" 
+					height="200px" 
 					image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
 				/>
 				<Image 
-					height="150px" 
+					height="200px" 
 					image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
 				/>
 			{/if}
@@ -237,8 +295,9 @@
 		<p class="preview-header">Ready image:</p>
 		<div class="ready-preview">
 			<Image 
-				height="400px" 
-				image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
+				height="none" 
+				imgClass="ready-img"
+				image_url={server_url+"/"+resultImagePath} 
 			/>
 		</div>
 	</div>
