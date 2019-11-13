@@ -1,8 +1,12 @@
 <script>
     import { onMount } from 'svelte';
 
-    export let image_url = "/sources/label/393-960.png";
+    export let image_url = "";
     export let height = "120px";
 </script>
 
-<img height={height} src="{image_url}" alt="label" />
+{#if image_url.includes(".")}
+    <img height={height} src="{image_url}" alt="label" />
+{:else}
+    <p>waiting for image...</p>
+{/if}
