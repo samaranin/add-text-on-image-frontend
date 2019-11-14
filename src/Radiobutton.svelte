@@ -12,6 +12,7 @@
     label {
         display: inline;
         padding: 10px;
+        cursor: pointer;
     }
 
     input[type=radio] {
@@ -23,6 +24,7 @@
         color: inherit;
         outline: none;
         transition: 300ms ease-out;
+        cursor: pointer;
     }
 
     @media (max-width: 640px) {

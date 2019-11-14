@@ -42,6 +42,7 @@
     select {
         float: right;
         width: 59%;
+        cursor: pointer;
     }
 
     div {
