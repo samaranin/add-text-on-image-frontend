@@ -4,15 +4,14 @@
 	import Input from './Input.svelte';
     import Radiobutton from './Radiobutton.svelte';
     import Preview from './Preview.svelte';
+    import {server_url} from "./env.js";
 
 	let selected_values = [];
 	let resultImagePath = "";
 
-	const server_url = "http://localhost:5000";
-
 	async function getImageSize(selected_image){ 
 		const response = await fetch(
-			server_url+"/api/get_image_size/", 
+			urlGenerator("/api/get_image_size/"), 
 			{
 				headers: {
 					'Accept': 'application/json',
@@ -29,7 +28,7 @@
 
 	async function getImageWithText() {
 		//clear previous generated images
-		const cleared = await fetch(server_url + "/api/remove_temp_files/");
+		const cleared = await fetch(urlGenerator("/api/remove_temp_files/"));
 
 		// write text on image
 		const data = {
@@ -48,7 +47,7 @@
 		};
 
 		const response = await fetch(
-			server_url+"/api/write_text/", 
+            urlGenerator("/api/write_text/"), 
 			{
 				headers: {
 					'Accept': 'application/json',
@@ -108,16 +107,32 @@
 <style>
 	.container {
 		width: 100%;
-	}
+    }
+    
+    .image-editor {
+        width: 39%;
+        display: inline-block;
+        background: #fff;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
 
-	.image-editor {
-		width: 39%;
-		display: inline-block;
+	.image-editor-form {
+        padding: 5px;
+    }
+
+    .image-editor-header{
+        text-align: center;
+        font-size: 15pt;
+        font-weight: bold;
+        color: #000;
+        background: floralwhite;
+        box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+        padding: 10px;
     }
     
     .editor-section {
         border-bottom: 1px solid rgba(0,0,0,0.5);
-        margin-bottom: 10px;
+        margin: 10px 0px;
     }
 
 	.preview {
@@ -127,9 +142,12 @@
 	
 	.image-size-inputs {
 		width: 100%;
-		display: inline-flex;
 		display: none;
-	}
+    }
+    
+    .action-buttons {
+        padding-top: 5px;
+    }
 
 	.show-preview {
 		float: left;
@@ -142,7 +160,8 @@
 	@media (max-width: 640px) {
 		.image-editor {
 			width: 100%;
-			display: block;
+			display: inline-block;
+            margin-bottom: 20px;
 		}
 
 		.preview {
@@ -176,129 +195,132 @@
 
 
 <div class="container">
-	<form class="image-editor">
-        <div class="editor-section">
-            <!--Selected font-->
-            <Dropdown 
-                label="Font:" 
-                list_url={urlGenerator("/api/fonts/")} 
-                bind:selected={selected_values["font_name"]} 
-            />
+    <div class="image-editor">
+        <div class="image-editor-header">Configuration</div>
+        <form class="image-editor-form">
+            <div class="editor-section">
+                <!--Selected font-->
+                <Dropdown 
+                    label="Font:" 
+                    list_url={urlGenerator("/api/fonts/")} 
+                    bind:selected={selected_values["font_name"]} 
+                />
 
-            <!--Selected background-->
-            <Dropdown 
-                label="Background:" 
-                list_url={urlGenerator("/api/backgrounds/")} 
-                bind:selected={selected_values["background_image"]} 
-                on:change={handleValueChange}	
-            />
+                <!--Selected background-->
+                <Dropdown 
+                    label="Background:" 
+                    list_url={urlGenerator("/api/backgrounds/")} 
+                    bind:selected={selected_values["background_image"]} 
+                    on:change={handleValueChange}	
+                />
 
-            <!--Selected label-->
-            <Dropdown 
-                label="Label:" 
-                list_url={urlGenerator("/api/labels/")} 
-                bind:selected={selected_values["label_image"]} 
-            />
+                <!--Selected label-->
+                <Dropdown 
+                    label="Label:" 
+                    list_url={urlGenerator("/api/labels/")} 
+                    bind:selected={selected_values["label_image"]} 
+                />
 
-            <!--Image join side-->
-            <Radiobutton 
-                labelLeft="Place label on left"
-                labelRight="Place label on right"
-                bind:value={selected_values["join"]}
-            />
-		</div>
+                <!--Image join side-->
+                <Radiobutton 
+                    labelLeft="Place label on left"
+                    labelRight="Place label on right"
+                    bind:value={selected_values["join"]}
+                />
+            </div>
 
-		<!--Header inputs-->
-        <div class="editor-section">
-            <Input 
-                label="Header:" 
-                placeholder="Header text" 
-                bind:value={selected_values["header"]} 
-                disabled="{false}" 
-            />
+            <!--Header inputs-->
+            <div class="editor-section">
+                <Input 
+                    label="Header:" 
+                    placeholder="Header text" 
+                    bind:value={selected_values["header"]} 
+                    disabled="{false}" 
+                />
 
-            <Input 
-                label="Header text width:" 
-                placeholder="40" 
-                bind:value={selected_values["text_width_header"]} 
-                disabled="{false}"
-            />
+                <Input 
+                    label="Header text width:" 
+                    placeholder="40" 
+                    bind:value={selected_values["text_width_header"]} 
+                    disabled="{false}"
+                />
 
-            <Input 
-                label="Header font size:" 
-                placeholder="30" 
-                bind:value={selected_values["font_size_header"]} 
-                disabled="{false}" 
-            />
-		</div>
+                <Input 
+                    label="Header font size:" 
+                    placeholder="30" 
+                    bind:value={selected_values["font_size_header"]} 
+                    disabled="{false}" 
+                />
+            </div>
 
-		<!--Paragraph inputs-->
-		<div class="editor-section">
-            <Input 
-                label="Paragraph:" 
-                placeholder="Paragraph text" 
-                bind:value={selected_values["paragraph"]} 
-                disabled="{false}" 
-            />
+            <!--Paragraph inputs-->
+            <div class="editor-section">
+                <Input 
+                    label="Paragraph:" 
+                    placeholder="Paragraph text" 
+                    bind:value={selected_values["paragraph"]} 
+                    disabled="{false}" 
+                />
 
-            <Input 
-                label="Paragraph text width:" 
-                placeholder="30" 
-                bind:value={selected_values["text_width_paragraph"]} 
-                disabled="{false}" 
-            />
+                <Input 
+                    label="Paragraph text width:" 
+                    placeholder="30" 
+                    bind:value={selected_values["text_width_paragraph"]} 
+                    disabled="{false}" 
+                />
 
-            <Input 
-                label="Paragraph font size:" 
-                placeholder="30" 
-                bind:value={selected_values["font_size_paragraph"]} 
-                disabled="{false}"
-            />
-		</div>
+                <Input 
+                    label="Paragraph font size:" 
+                    placeholder="30" 
+                    bind:value={selected_values["font_size_paragraph"]} 
+                    disabled="{false}"
+                />
+            </div>
 
-		<!--Footer inputs-->
-        <div class="editor-section">
-            <Input 
-                label="Footer:" 
-                placeholder="Footer text" 
-                bind:value={selected_values["footer"]} 
-                disabled="{false}" 
-            />
-            <Input 
-                label="Footer font size:" 
-                placeholder="30" 
-                bind:value={selected_values["font_size_footer"]} 
-                disabled="{false}" 
-            />
-		</div>
+            <!--Footer inputs-->
+            <div class="editor-section">
+                <Input 
+                    label="Footer:" 
+                    placeholder="Footer text" 
+                    bind:value={selected_values["footer"]} 
+                    disabled="{false}" 
+                />
+                <Input 
+                    label="Footer font size:" 
+                    placeholder="30" 
+                    bind:value={selected_values["font_size_footer"]} 
+                    disabled="{false}" 
+                />
+            </div>
 
-		<!--Image size-->
-		<div class="image-size-inputs editor-section">
-			<Input 
-				label="Width:" 
-				placeholder="960" 
-				bind:value={selected_values["width"]} 
-				disabled="{true}" 
-			/>
-			
-			<Input 
-				label="Height:" 
-				placeholder="960" 
-				bind:value={selected_values["height"]} 
-				disabled="{true}" 
-			/>
-		</div>
+            <!--Image size-->
+            <div class="image-size-inputs editor-section">
+                <Input 
+                    label="Width:" 
+                    placeholder="960" 
+                    bind:value={selected_values["width"]} 
+                    disabled="{true}" 
+                />
+                
+                <Input 
+                    label="Height:" 
+                    placeholder="960" 
+                    bind:value={selected_values["height"]} 
+                    disabled="{true}" 
+                />
+            </div>
 
-		<!--Action buttons-->
-		<div class="action-buttons">
-			<button on:click|preventDefault={getPreviewImage} class="show-preview">Show preview</button>
-			{#if resultImagePath != ""}
-				<a class="download" href="{urlGenerator("/",resultImagePath)}" download="image-preview">Download</a>
-			{:else}
-				<a class="disabled-button" href="#">Download</a>
-			{/if}
-		</div>
-	</form>
+            <!--Action buttons-->
+            <div class="action-buttons">
+                <button on:click|preventDefault={getPreviewImage} class="show-preview">Show preview</button>
+                {#if resultImagePath != ""}
+                    <a class="download" href="{urlGenerator("/",resultImagePath)}" download="image-preview">Download</a>
+                {:else}
+                    <a class="disabled-button" href="/#">Download</a>
+                {/if}
+            </div>
+        </form>
+    </div>
 
 	<div class="preview">
 		<Preview 

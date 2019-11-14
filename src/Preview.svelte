@@ -13,7 +13,8 @@
 		justify-content: center;
 		padding: 15px;
 		margin-bottom: 15px;
-		box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        background: #fff;
 	}
 
 	.preview-header {
@@ -28,7 +29,7 @@
 	}
 </style>
 
-<p class="preview-header">Selected images:</p>
+<p class="preview-header">Selected images</p>
 <div class="raw-preview">
     {#if join === "left"}
         <Image 
@@ -52,7 +53,7 @@
     
 </div>
 
-<p class="preview-header">Ready image:</p>
+<p class="preview-header">Ready image</p>
 <div class="ready-preview">
     <Image 
         height="none" 
