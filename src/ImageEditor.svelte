@@ -2,7 +2,8 @@
 	import Dropdown from './Dropdown.svelte';
 	import Image from './Image.svelte';
 	import Input from './Input.svelte';
-	import Radiobutton from './Radiobutton.svelte';
+    import Radiobutton from './Radiobutton.svelte';
+    import Preview from './Preview.svelte';
 
 	let selected_values = [];
 	let resultImagePath = "";
@@ -98,6 +99,10 @@
 	function repaintPreview(event) {
 		getPreviewImage();
 	}
+
+    function urlGenerator(path, image="") {
+        return server_url + path + image;
+    }
 </script>
 
 <style>
@@ -118,25 +123,6 @@
 	.preview {
 		float: right;
 		width: 59%;
-	}
-
-	.raw-preview, .ready-preview {
-		display: flex;
-		justify-content: center;
-		padding: 15px;
-		margin-bottom: 15px;
-		box-shadow: 0 0 5px rgba(0,0,0,0.5);
-	}
-
-	.preview-header {
-		text-align: center;
-		font-size: 15pt;
-		font-weight: bold;
-		padding: 10px;
-		margin-block-start: 0;
-		margin-block-end: 0;
-		background: floralwhite;
-		box-shadow: 0px -3px 10px rgba(0,0,0,0.5);
 	}
 	
 	.image-size-inputs {
@@ -195,14 +181,14 @@
             <!--Selected font-->
             <Dropdown 
                 label="Font:" 
-                list_url={server_url+"/api/fonts/"} 
+                list_url={urlGenerator("/api/fonts/")} 
                 bind:selected={selected_values["font_name"]} 
             />
 
             <!--Selected background-->
             <Dropdown 
                 label="Background:" 
-                list_url={server_url+"/api/backgrounds/"} 
+                list_url={urlGenerator("/api/backgrounds/")} 
                 bind:selected={selected_values["background_image"]} 
                 on:change={handleValueChange}	
             />
@@ -210,7 +196,7 @@
             <!--Selected label-->
             <Dropdown 
                 label="Label:" 
-                list_url={server_url+"/api/labels/"} 
+                list_url={urlGenerator("/api/labels/")} 
                 bind:selected={selected_values["label_image"]} 
             />
 
@@ -307,7 +293,7 @@
 		<div class="action-buttons">
 			<button on:click|preventDefault={getPreviewImage} class="show-preview">Show preview</button>
 			{#if resultImagePath != ""}
-				<a class="download" href="{server_url+"/"+resultImagePath}" download="image-preview">Download</a>
+				<a class="download" href="{urlGenerator("/",resultImagePath)}" download="image-preview">Download</a>
 			{:else}
 				<a class="disabled-button" href="#">Download</a>
 			{/if}
@@ -315,36 +301,11 @@
 	</form>
 
 	<div class="preview">
-		<p class="preview-header">Selected images:</p>
-		<div class="raw-preview">
-			{#if selected_values["join"] === "left"}
-				<Image 
-					height="200px" 
-					image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
-				/>
-				<Image 
-					height="200px" 
-					image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
-				/>
-			{:else}
-				<Image 
-					height="200px" 
-					image_url={server_url+"/sources/backgrounds/"+selected_values["background_image"]} 
-				/>
-				<Image 
-					height="200px" 
-					image_url={server_url+"/sources/labels/"+selected_values["label_image"]} 
-				/>
-			{/if}
-			
-		</div>
-		<p class="preview-header">Ready image:</p>
-		<div class="ready-preview">
-			<Image 
-				height="none" 
-				imgClass="ready-img"
-				image_url={server_url+"/"+resultImagePath} 
-			/>
-		</div>
+		<Preview 
+            join={selected_values["join"]}
+            labelImage={urlGenerator("/sources/labels/", selected_values["label_image"])}
+            backgroundImage={urlGenerator("/sources/backgrounds/", selected_values["background_image"])}
+            readyImage={urlGenerator("/",resultImagePath)}
+        />
 	</div>
 </div>
