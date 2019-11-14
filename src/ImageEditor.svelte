@@ -126,9 +126,10 @@
         font-size: 15pt;
         font-weight: bold;
         color: #000;
-        background: floralwhite;
+        background: #3d6799;
         box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
         padding: 10px;
+        color: #fff;
     }
     
     .editor-section {
@@ -174,9 +175,9 @@
 
 	button, a  {
 		text-decoration: none;
-		color: #000;
+		color: #fff;
 		border: 1px solid black;
-		background: floralwhite;
+		background: #3d6799;
 		cursor: pointer;
 	}
 

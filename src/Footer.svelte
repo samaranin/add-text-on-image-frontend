@@ -7,15 +7,16 @@
         box-shadow: 0 0 5px rgba(0,0,0,0.5);
         width: 100%;
         text-align: center;
-        background: antiquewhite;
+        background: #3D9970;
         padding: 1rem 0px;
         position: absolute;
         bottom: 0;
+        color: #fff;
     }
 
     a {
         text-decoration: none;
-        color: black;
+        color: #fff;
     }
 </style>
 

@@ -24,8 +24,9 @@
 		padding: 10px;
 		margin-block-start: 0;
 		margin-block-end: 0;
-		background: floralwhite;
-		box-shadow: 0px -3px 10px rgba(0,0,0,0.5);
+		background: #3d6799;
+        box-shadow: 0px -3px 10px rgba(0,0,0,0.5);
+        color: #fff;
 	}
 </style>
 

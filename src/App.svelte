@@ -5,12 +5,12 @@
 
 <style>
 	header {
-		color: #000;
+		color: #fff;
 		font-size: 20pt;
-		font-weight: bold;
+		font-weight: 500;
 		padding: 15px 0px 15px 15px;
 		margin-bottom: 20px;
-		background: antiquewhite;
+		background: #3D9970;
 		box-shadow: 0 0 5px rgba(0,0,0,0.5);
 	}
 
