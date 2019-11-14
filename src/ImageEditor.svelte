@@ -33,17 +33,18 @@
 		// write text on image
 		const data = {
 			"background_image": selected_values["background_image"], // <- must be on server in sources/backgrounds   
-			"header": selected_values["header"],    
-			"paragraph": selected_values["paragraph"],    
+			"header": selected_values["header"],        
 			"footer": selected_values["footer"],   
 			"font_name": selected_values["font_name"],     // <- must be on server in fonts/
 			"width": selected_values["width"],    
-			"height": selected_values["height"],    
+            "height": selected_values["height"],
+            "header_font_name": selected_values["header_font_name"],    
 			"text_width_header": selected_values["text_width_header"],  
-			"font_size_header": selected_values["font_size_header"],    
-			"text_width_paragraph": selected_values["text_width_paragraph"],    
-			"font_size_paragraph": selected_values["font_size_paragraph"],    
-			"font_size_footer": selected_values["font_size_footer"]
+            "font_size_header": selected_values["font_size_header"],
+            "footer_font_name": selected_values["footer_font_name"],
+            "font_size_footer": selected_values["font_size_footer"],
+            "top_padding": selected_values["top_padding"],
+            "bottom_padding": selected_values["bottom_padding"],
 		};
 
 		const response = await fetch(
@@ -199,13 +200,6 @@
         <div class="image-editor-header">Configuration</div>
         <form class="image-editor-form">
             <div class="editor-section">
-                <!--Selected font-->
-                <Dropdown 
-                    label="Font:" 
-                    list_url={urlGenerator("/api/fonts/")} 
-                    bind:selected={selected_values["font_name"]} 
-                />
-
                 <!--Selected background-->
                 <Dropdown 
                     label="Background:" 
@@ -230,6 +224,13 @@
             </div>
 
             <!--Header inputs-->
+                <!--Selected font-->
+                <Dropdown 
+                    label="Header font:" 
+                    list_url={urlGenerator("/api/fonts/")} 
+                    bind:selected={selected_values["header_font_name"]} 
+                />
+
             <div class="editor-section">
                 <Input 
                     label="Header:" 
@@ -251,34 +252,24 @@
                     bind:value={selected_values["font_size_header"]} 
                     disabled="{false}" 
                 />
-            </div>
 
-            <!--Paragraph inputs-->
-            <div class="editor-section">
                 <Input 
-                    label="Paragraph:" 
-                    placeholder="Paragraph text" 
-                    bind:value={selected_values["paragraph"]} 
+                    label="Top padding:" 
+                    placeholder="200" 
+                    bind:value={selected_values["top_padding"]} 
                     disabled="{false}" 
-                />
-
-                <Input 
-                    label="Paragraph text width:" 
-                    placeholder="30" 
-                    bind:value={selected_values["text_width_paragraph"]} 
-                    disabled="{false}" 
-                />
-
-                <Input 
-                    label="Paragraph font size:" 
-                    placeholder="30" 
-                    bind:value={selected_values["font_size_paragraph"]} 
-                    disabled="{false}"
                 />
             </div>
 
             <!--Footer inputs-->
             <div class="editor-section">
+                <!--Selected font-->
+                <Dropdown 
+                    label="Footer font:" 
+                    list_url={urlGenerator("/api/fonts/")} 
+                    bind:selected={selected_values["footer_font_name"]} 
+                />
+
                 <Input 
                     label="Footer:" 
                     placeholder="Footer text" 
@@ -289,6 +280,13 @@
                     label="Footer font size:" 
                     placeholder="30" 
                     bind:value={selected_values["font_size_footer"]} 
+                    disabled="{false}" 
+                />
+
+                <Input 
+                    label="Bottom padding:" 
+                    placeholder="140" 
+                    bind:value={selected_values["bottom_padding"]} 
                     disabled="{false}" 
                 />
             </div>
