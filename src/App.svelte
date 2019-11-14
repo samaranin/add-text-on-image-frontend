@@ -8,7 +8,7 @@
 		color: #fff;
 		font-size: 20pt;
 		font-weight: 500;
-		padding: 15px 0px 15px 15px;
+		padding: 10px 0px 10px 15px;
 		margin-bottom: 20px;
 		background: rgba(61, 153, 112, 0.9);
 		box-shadow: 0 0 5px rgba(0,0,0,0.5);
@@ -16,9 +16,8 @@
 
 	.page-container {
 		overflow: hidden;
-		display: block;
 		position: relative;
-		padding-bottom: 100px; /* height of your footer */
+  		min-height: 100vh;
 		background: whitesmoke;
 	}
 

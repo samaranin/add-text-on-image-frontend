@@ -9,12 +9,13 @@
 <style>
 .ready-img {
     max-width: 100%;
-    max-height: 50vh;
+    max-height: 41.1vh;
+    min-height: 41.1vh;
     height: auto;
     margin: auto;
     object-fit: scale-down;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    /* border: 1px solid #ddd; */
+    /* border-radius: 4px; */
     padding: 5px;
 }
 </style>
