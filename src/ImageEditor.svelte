@@ -125,9 +125,8 @@
         text-align: center;
         font-size: 15pt;
         font-weight: bold;
-        color: #000;
-        background: #3d6799;
-        box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+        background: rgba(61, 153, 112, 0.9);
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
         padding: 10px;
         color: #fff;
     }
@@ -177,7 +176,7 @@
 		text-decoration: none;
 		color: #fff;
 		border: 1px solid black;
-		background: #3d6799;
+		background: rgba(61, 153, 112, 0.9);
 		cursor: pointer;
 	}
 

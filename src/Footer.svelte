@@ -7,7 +7,7 @@
         box-shadow: 0 0 5px rgba(0,0,0,0.5);
         width: 100%;
         text-align: center;
-        background: #3D9970;
+        background: rgba(61, 153, 112, 0.9);
         padding: 1rem 0px;
         position: absolute;
         bottom: 0;

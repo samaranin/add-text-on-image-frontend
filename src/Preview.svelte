@@ -8,12 +8,15 @@
 </script>
 
 <style>
+    .preview-wrapper {
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
     .raw-preview, .ready-preview {
 		display: flex;
 		justify-content: center;
 		padding: 15px;
 		margin-bottom: 15px;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
         background: #fff;
 	}
 
@@ -22,43 +25,44 @@
 		font-size: 15pt;
 		font-weight: bold;
 		padding: 10px;
-		margin-block-start: 0;
-		margin-block-end: 0;
-		background: #3d6799;
-        box-shadow: 0px -3px 10px rgba(0,0,0,0.5);
+		background: rgba(61, 153, 112, 0.9);
+        box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
         color: #fff;
 	}
 </style>
 
-<p class="preview-header">Selected images</p>
-<div class="raw-preview">
-    {#if join === "left"}
-        <Image 
-            height="200px" 
-            image_url={labelImage} 
-        />
-        <Image 
-            height="200px" 
-            image_url={backgroundImage} 
-        />
-    {:else}
-        <Image 
-            height="200px" 
-            image_url={backgroundImage} 
-        />
-        <Image 
-            height="200px" 
-            image_url={labelImage}  
-        />
-    {/if}
-    
+<div class="preview-wrapper">
+    <div class="preview-header">Selected images</div>
+    <div class="raw-preview">
+        {#if join === "left"}
+            <Image 
+                height="200px" 
+                image_url={labelImage} 
+            />
+            <Image 
+                height="200px" 
+                image_url={backgroundImage} 
+            />
+        {:else}
+            <Image 
+                height="200px" 
+                image_url={backgroundImage} 
+            />
+            <Image 
+                height="200px" 
+                image_url={labelImage}  
+            />
+        {/if}
+    </div>
 </div>
 
-<p class="preview-header">Ready image</p>
-<div class="ready-preview">
-    <Image 
-        height="none" 
-        imgClass="ready-img"
-        image_url={readyImage} 
-    />
+<div class="preview-wrapper">
+    <div class="preview-header">Ready image</div>
+    <div class="ready-preview">
+        <Image 
+            height="none" 
+            imgClass="ready-img"
+            image_url={readyImage} 
+        />
+    </div>
 </div>

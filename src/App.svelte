@@ -10,7 +10,7 @@
 		font-weight: 500;
 		padding: 15px 0px 15px 15px;
 		margin-bottom: 20px;
-		background: #3D9970;
+		background: rgba(61, 153, 112, 0.9);
 		box-shadow: 0 0 5px rgba(0,0,0,0.5);
 	}
 
@@ -19,6 +19,7 @@
 		display: block;
 		position: relative;
 		padding-bottom: 100px; /* height of your footer */
+		background: whitesmoke;
 	}
 
 	.image-editor {
