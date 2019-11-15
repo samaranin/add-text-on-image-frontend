@@ -34,7 +34,7 @@
 
 
 <div class="page-container">
-	<header>Create image with text</header>
+	<header>NUWEE library helper</header>
 
 	<div class="image-editor">
 		<ImageEditor />
