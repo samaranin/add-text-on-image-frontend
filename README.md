@@ -5,6 +5,8 @@
 
 This is a frontend for another my project - https://github.com/samaranin/add-text-to-image-backend   
 
+![UI Example](example.png)
+
 ---
 
 #### Get started
