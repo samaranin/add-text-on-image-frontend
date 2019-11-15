@@ -11,7 +11,7 @@
 <style>
     label {
         display: inline-flex;
-        padding: 10px;
+        padding: 10px 0px;
         cursor: pointer;
         width: 49%;
     }
@@ -55,6 +55,9 @@
         left: 0;
         height: 25px;
         width: 25px;
+        min-width: 25px;
+        height: 25px;
+        width: 25px;
         background-color: #ededed;
         border-radius: 50%;
         box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.5);
@@ -94,6 +97,8 @@
     .label {
         padding-top: 3px;
         padding-left: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 </style>
 
