@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  text-to-image:
+    container_name: text-to-image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3535:80'
