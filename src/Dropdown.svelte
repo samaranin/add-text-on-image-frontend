@@ -43,7 +43,14 @@
         float: right;
         width: 59%;
         cursor: pointer;
+        background: #ededed;
+        box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.5);
     }
+
+    :focus, select:hover {
+        outline: none;
+        border: 1px solid rgba(61, 153, 112, 0.9);
+    }  
 
     div {
         width: 100%;

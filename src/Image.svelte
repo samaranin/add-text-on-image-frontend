@@ -9,8 +9,8 @@
 <style>
 .ready-img {
     max-width: 100%;
-    max-height: 41.1vh;
-    min-height: 41.1vh;
+    max-height: 42vh;
+    min-height: 42vh;
     height: auto;
     margin: auto;
     object-fit: scale-down;

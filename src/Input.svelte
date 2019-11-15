@@ -18,6 +18,13 @@
     input {
         float: right;
         width: 59%;
+        background: #ededed;
+        box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    :focus, input:hover {
+        outline: none;
+        border: 1px solid rgba(61, 153, 112, 0.9);
     }
 
     div {
@@ -41,13 +48,15 @@
     label {
         width: 40%;
     }
-
-</style>
+    </style>
 
 <div>
     <label>{label}</label>
     {#if !disabled} 
         <input type="text" placeholder="{placeholder}" value="{placeholder}" bind:value={value}>
+        <span class="focus-border">
+            <i></i>
+        </span>
     {:else}
         <input type="text" placeholder="{placeholder}" value="{placeholder}" bind:value={value} disabled>
     {/if}

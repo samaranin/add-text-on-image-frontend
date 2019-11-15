@@ -137,6 +137,7 @@
     .editor-section {
         border-bottom: 1px solid rgba(0,0,0,0.5);
         margin: 10px 0px;
+            padding: 0px 0px 5px 0px;
     }
 
 	.preview {
@@ -178,15 +179,20 @@
 	button, a  {
 		text-decoration: none;
 		color: #fff;
-		border: 1px solid black;
+		border: none;
 		background: rgba(61, 153, 112, 0.9);
 		cursor: pointer;
+        box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.5);
 	}
 
 	a {
 		padding: 6.4px 10px;
     	border-radius: 2px;
 	}
+
+    a:hover, button:hover {
+        background: rgb(61, 153, 112);
+    }
 
 	.disabled-button {
 		float: right;
@@ -195,6 +201,10 @@
 		border: 1px solid #efefef;
 		cursor: default;
 	}
+
+    .disabled-button:hover {
+        background: #ededed;
+    }
 </style>
 
 
@@ -227,14 +237,13 @@
             </div>
 
             <!--Header inputs-->
-                <!--Selected font-->
+            <div class="editor-section">
+                 <!--Selected font-->
                 <Dropdown 
                     label="Header font:" 
                     list_url={urlGenerator("/api/fonts/")} 
                     bind:selected={selected_values["header_font_name"]} 
                 />
-
-            <div class="editor-section">
                 <Input 
                     label="Header:" 
                     placeholder="Header text" 

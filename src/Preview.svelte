@@ -31,7 +31,7 @@
 	}
 </style>
 
-<div class="preview-wrapper">
+<div class="preview-wrapper raw-preview-wrapper">
     <div class="preview-header">Selected images</div>
     <div class="raw-preview">
         {#if join === "left"}
