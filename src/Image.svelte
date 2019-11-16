@@ -9,14 +9,25 @@
 <style>
 .ready-img {
     max-width: 100%;
-    max-height: 42vh;
-    min-height: 42vh;
+    max-height: 45.4vh;
+    min-height: 45.4vh;
     height: auto;
     margin: auto;
     object-fit: scale-down;
     /* border: 1px solid #ddd; */
     /* border-radius: 4px; */
     padding: 5px;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 18vh;
+    height: auto;
+    margin: 0;
+    object-fit: scale-down;
+    /* border: 1px solid #ddd; */
+    /* border-radius: 4px; */
+    padding: 0;
 }
 </style>
 

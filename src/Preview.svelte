@@ -37,19 +37,23 @@
         {#if join === "left"}
             <Image 
                 height="200px" 
+                imgClass="preview-img"
                 image_url={labelImage} 
             />
             <Image 
                 height="200px" 
+                imgClass="preview-img"
                 image_url={backgroundImage} 
             />
         {:else}
             <Image 
                 height="200px" 
+                imgClass="preview-img"
                 image_url={backgroundImage} 
             />
             <Image 
                 height="200px" 
+                imgClass="preview-img"
                 image_url={labelImage}  
             />
         {/if}
