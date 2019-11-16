@@ -4,6 +4,11 @@
 	import Input from './Input.svelte';
     import Radiobutton from './Radiobutton.svelte';
     import Preview from './Preview.svelte';
+
+    // !!! IMPORTANT 
+    // !!! Create file env.js with next code
+    // !!! export const server_url = "https://your.server.url"
+    // !!! or add it in this place and remove string below
     import {server_url} from "./env.js";
 
 	let selected_values = [];

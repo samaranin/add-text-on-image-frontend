@@ -20,7 +20,7 @@
 }
 </style>
 
-{#if image_url.includes(".")}
+{#if image_url.includes(".png") || image_url.includes(".jpg")}
     <img class={imgClass} height={height} src="{image_url}" alt="label" />
 {:else}
     <p>waiting for image...</p>
