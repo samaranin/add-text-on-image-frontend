@@ -46,6 +46,7 @@
             "header_font_name": selected_values["header_font_name"],    
 			"text_width_header": selected_values["text_width_header"],  
             "font_size_header": selected_values["font_size_header"],
+            "text_width_footer": selected_values["text_width_footer"],
             "footer_font_name": selected_values["footer_font_name"],
             "font_size_footer": selected_values["font_size_footer"],
             "top_padding": selected_values["top_padding"],
@@ -293,6 +294,14 @@
                     bind:value={selected_values["footer"]} 
                     disabled="{false}" 
                 />
+
+                <Input 
+                    label="Footer text width:" 
+                    placeholder="30" 
+                    bind:value={selected_values["text_width_footer"]} 
+                    disabled="{false}" 
+                />
+
                 <Input 
                     label="Footer font size:" 
                     placeholder="30" 
@@ -302,7 +311,7 @@
 
                 <Input 
                     label="Bottom padding:" 
-                    placeholder="140" 
+                    placeholder="390" 
                     bind:value={selected_values["bottom_padding"]} 
                     disabled="{false}" 
                 />
