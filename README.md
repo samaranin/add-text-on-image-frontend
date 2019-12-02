@@ -14,7 +14,7 @@ This is a frontend for another my project - https://github.com/samaranin/add-tex
 Install the dependencies...
 
 ```bash
-cd svelte-app
+cd <project-folder>
 npm install
 ```
 
